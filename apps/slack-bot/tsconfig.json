@@ -1,0 +1,9 @@
+{
+  "extends": "tsconfig/base.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "ESNext",
+    "module": "ESNext",
+  },
+}

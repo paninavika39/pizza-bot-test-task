@@ -1,0 +1,10 @@
+{
+  "extends": "tsconfig/base.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+  },
+  "include": ["src/**/*"]
+
+}

@@ -1,0 +1,33 @@
+<h1>Текущие заказы:</h1>
+<div class="grid">
+  <div class="card" *ngFor="let item of pizza">
+    <div class="card__header">
+      <p class="card__name">{{ item.name }}</p>
+    </div>
+    <div class="card__body">
+      <div class="card__list">
+        <p class="card__text">
+          <strong>Заказчик:</strong> {{ item.user_name }}
+        </p>
+        <p class="card__text">
+          <strong>Размер:</strong> {{ item.size }}
+        </p>
+        <p class="card__text">
+          <strong>Тип теста:</strong> {{ item.dough }}
+        </p>
+        <p class="card__text">
+          <strong>Бортик:</strong> {{ item.side }}
+        </p>
+        <p class="card__text">
+          <strong>Добавка:</strong> {{ item.additive }}
+        </p>
+      </div>
+      <p class="card__text">
+        <strong>Адрес доставки</strong>: {{ item.adress }}
+      </p>
+    </div>
+  </div>
+</div>
+<button (click)="loadOrders()">Запросить заказы</button>
+
+<!-- <router-outlet></router-outlet> -->

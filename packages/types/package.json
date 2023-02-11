@@ -1,0 +1,9 @@
+{
+  "name": "types",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "common.ts",
+    "data.ts"
+  ]
+}

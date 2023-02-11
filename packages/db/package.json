@@ -1,0 +1,25 @@
+{
+  "name": "db",
+  "version": "0.0.0",
+  "scripts": {
+    "lint": "eslint --fix --ext .ts src/"
+  },
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "src/index.ts"
+  ],
+  "dependencies": {
+    "mongodb": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.34.0",
+    "eslint-config-custom": "*",
+    "tsconfig": "*",
+    "typescript": "^4.9.5"
+  }
+}

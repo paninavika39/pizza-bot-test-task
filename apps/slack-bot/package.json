@@ -1,0 +1,30 @@
+{
+  "name": "slack-bot",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node --esm --experimental-specifier-resolution=node src/",
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"npm start\"",
+    "lint": "eslint --fix --ext .ts src/"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@slack/client": "^5.0.2",
+    "@slack/interactive-messages": "^2.0.2",
+    "@slack/rtm-api": "^6.0.0",
+    "db": "*",
+    "dotenv": "^16.0.3",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-config-custom": "*",
+    "nodemon": "^2.0.20",
+    "tsconfig": "*",
+    "types": "*",
+    "typescript": "^4.9.5"
+  }
+}
