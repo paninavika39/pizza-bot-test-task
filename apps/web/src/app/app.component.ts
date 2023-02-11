@@ -13,9 +13,27 @@ export class AppComponent {
 
   pizza: SavedOrder[] = [];
 
+  ngOnInit() {
+    this.loadOrders();
+  }
+
   loadOrders() {
     this.pizzaService.getOrders().subscribe((data) => {
       this.pizza = data;
     });
+  }
+
+  changeStatus(orderId: string, status: string) {
+    if (status === 'done') {
+      this.pizzaService.doneOrder(orderId).subscribe(() => {
+        this.loadOrders();
+      });
+    }
+
+    if (status === 'cancel') {
+      this.pizzaService.cancelOrder(orderId).subscribe(() => {
+        this.loadOrders();
+      });
+    }
   }
 }

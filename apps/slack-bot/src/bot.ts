@@ -4,10 +4,11 @@ import { createMessageAdapter } from '@slack/interactive-messages';
 import db from './db';
 import { every, isString, isStaticSelectAction } from './utils/guards';
 import { formatAdress } from './utils/format';
-import type { Payload } from './types';
+import type { Change, Payload } from './types';
 import type { Order } from 'types/data';
 import type { Nullable } from 'types/common';
 import orderForm from './assets/orderForm.json' assert { type: 'json' };
+import { ObjectId } from 'db';
 
 if (process.env.SLACK_SIGNING_SECRET === undefined) {
   throw new Error('Переменная SLACK_SIGNING_SECRET не определена');
@@ -44,6 +45,8 @@ function createNewOrder(userName: string) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return currentOrders.get(userName)!;
 }
+
+const ordersCollection = db.collection('orders');
 
 //SLACKBOT REALIZATION...
 slackInteractions.action({ type: 'button' }, async (payload: Payload) => {
@@ -117,7 +120,6 @@ slackInteractions.action({ type: 'button' }, async (payload: Payload) => {
     ],
   });
 
-  const ordersCollection = db.collection('orders');
   await ordersCollection.insertOne(newOrder);
 
   const userOrdersCount = await ordersCollection.countDocuments({
@@ -214,4 +216,20 @@ async function postMessage(
 }
 
 await rtm.start();
+
+const changeStream = ordersCollection.watch();
+
+changeStream.on('change', async (event: Change) => {
+  /*const data = event['documentKey'];
+  console.log(data);
+
+  const order = await ordersCollection.find({
+    _id: new ObjectId(data),
+  });
+  console.log('ORDER', order);
+  /*await web.chat.postMessage({
+    text: Text,
+    username: aChannel,
+  });*/
+});
 //...SLACKBOT REALIZATION

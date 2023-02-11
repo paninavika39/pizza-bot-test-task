@@ -1,4 +1,5 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
+export * from 'mongodb';
 
 export const createClient = async (url: string | undefined) => {
   if (url === undefined) {

@@ -25,6 +25,13 @@
       <p class="card__text">
         <strong>Адрес доставки</strong>: {{ item.adress }}
       </p>
+      <p class="card__text">
+        <strong>Дата и время заказа</strong>: {{ item.date | date:'dd.MM.yyyy HH:mm'}}
+      </p>
+      <div class="card__footer">
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'done')">Выполнить заказ</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'cancel')">Отменить заказ</button>
+      </div>
     </div>
   </div>
 </div>

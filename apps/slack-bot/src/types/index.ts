@@ -106,3 +106,14 @@ export type Text = {
   text: string;
   emoji: boolean;
 };
+
+export type Change = {
+  _id: string;
+  operationType: string;
+  clusterTime: string;
+  ns: string;
+  documentKey: string;
+  updateDescription: string;
+  removedFields: string;
+  truncatedArrays: string;
+};

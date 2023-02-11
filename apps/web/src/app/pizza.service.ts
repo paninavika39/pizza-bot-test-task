@@ -6,9 +6,22 @@ import type { SavedOrder } from 'types/data';
   providedIn: 'root',
 })
 export class PizzaService {
+  private baseURL = 'http://127.0.0.1:8080/api';
+
   constructor(private http: HttpClient) {}
 
   getOrders() {
-    return this.http.get<SavedOrder[]>('http://127.0.0.1:8080/api/orders');
+    return this.http.get<SavedOrder[]>(`${this.baseURL}/orders`);
+  }
+
+  doneOrder(orderId: string) {
+    return this.http.post<void>(`${this.baseURL}/orders/${orderId}/done`, null);
+  }
+
+  cancelOrder(orderId: string) {
+    return this.http.post<void>(
+      `${this.baseURL}/orders/${orderId}/cancel`,
+      null
+    );
   }
 }
