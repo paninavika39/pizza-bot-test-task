@@ -2,7 +2,7 @@
 <div class="grid">
   <div class="card" *ngFor="let item of pizza">
     <div class="card__header">
-      <p class="card__name">{{ item.name }}</p>
+      <p class="card__name">{{ item.name }}</p> 
     </div>
     <div class="card__body">
       <div class="card__list">
@@ -23,18 +23,28 @@
         </p>
       </div>
       <p class="card__text">
-        <strong>Адрес доставки</strong>: {{ item.adress }}
+        <strong>Адрес доставки:</strong> {{ item.adress }}
       </p>
       <p class="card__text">
-        <strong>Дата и время заказа</strong>: {{ item.date | date:'dd.MM.yyyy HH:mm'}}
+        <strong>Дата и время заказа:</strong> {{ item.date | date:'dd.MM.yyyy HH:mm'}}
       </p>
+      <div class="status">
+      <p class="card__text">
+        <strong>Статус заказа:</strong> {{ item.status }} 
+      </p>
+      </div>
+      <p class="card__name"> Изменить статус заказа </p>
       <div class="card__footer">
-        <button class="card__button" type="button" (click)="changeStatus(item._id, 'done')">Выполнить заказ</button>
-        <button class="card__button" type="button" (click)="changeStatus(item._id, 'cancel')">Отменить заказ</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'confirm')">Принять</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'cooking')">Готовить</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'delivering')">В доставке</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'done')">Доставлено</button>
+        <button class="card__button" type="button" (click)="changeStatus(item._id, 'cancel')">Отменить</button>
       </div>
     </div>
   </div>
 </div>
 <button (click)="loadOrders()">Запросить заказы</button>
+
 
 <!-- <router-outlet></router-outlet> -->

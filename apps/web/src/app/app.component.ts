@@ -13,6 +13,10 @@ export class AppComponent {
 
   pizza: SavedOrder[] = [];
 
+  changeColor() {
+    //console.log('сработало'); TO DO
+  }
+
   ngOnInit() {
     this.loadOrders();
   }
@@ -24,6 +28,26 @@ export class AppComponent {
   }
 
   changeStatus(orderId: string, status: string) {
+    //this.changeColor(orderId); TO DO
+
+    if (status === 'confirm') {
+      this.pizzaService.confirmOrder(orderId).subscribe(() => {
+        this.loadOrders();
+      });
+    }
+
+    if (status === 'cooking') {
+      this.pizzaService.cookingOrder(orderId).subscribe(() => {
+        this.loadOrders();
+      });
+    }
+
+    if (status === 'delivering') {
+      this.pizzaService.deliverOrder(orderId).subscribe(() => {
+        this.loadOrders();
+      });
+    }
+
     if (status === 'done') {
       this.pizzaService.doneOrder(orderId).subscribe(() => {
         this.loadOrders();

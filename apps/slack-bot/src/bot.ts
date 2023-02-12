@@ -217,19 +217,12 @@ async function postMessage(
 
 await rtm.start();
 
-const changeStream = ordersCollection.watch();
-
+/*const changeStream = ordersCollection.watch();
 changeStream.on('change', async (event: Change) => {
-  /*const data = event['documentKey'];
-  console.log(data);
-
-  const order = await ordersCollection.find({
-    _id: new ObjectId(data),
+  console.log('Что то изменилось');
+  return await web.chat.postMessage({
+    text: 'Что-то изменилось',
+    channel: '',
   });
-  console.log('ORDER', order);
-  /*await web.chat.postMessage({
-    text: Text,
-    username: aChannel,
-  });*/
-});
+});*/
 //...SLACKBOT REALIZATION

@@ -14,6 +14,27 @@ export class PizzaService {
     return this.http.get<SavedOrder[]>(`${this.baseURL}/orders`);
   }
 
+  confirmOrder(orderId: string) {
+    return this.http.post<void>(
+      `${this.baseURL}/orders/${orderId}/confirm`,
+      null
+    );
+  }
+
+  cookingOrder(orderId: string) {
+    return this.http.post<void>(
+      `${this.baseURL}/orders/${orderId}/cooking`,
+      null
+    );
+  }
+
+  deliverOrder(orderId: string) {
+    return this.http.post<void>(
+      `${this.baseURL}/orders/${orderId}/delivering`,
+      null
+    );
+  }
+
   doneOrder(orderId: string) {
     return this.http.post<void>(`${this.baseURL}/orders/${orderId}/done`, null);
   }

@@ -7,6 +7,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.status {
+  display: grid;
+  background:  rgba(58, 182, 74, 0.5)
+}
+
 .grid {
   gap: 48px;
   padding: 48px;
@@ -33,7 +38,7 @@
 
   &__footer {
     gap: 12px;
-    padding: 12px 24px 24px 24px;
+    padding-bottom: 24px;
     display: flex;
     flex-wrap: wrap;
   }
@@ -54,11 +59,13 @@
   }
 
   &__button {
-    padding: 8px 12px;
+    width: 70px;
+    height: 50px;
+   // padding: 8px 12px;
     border: none;
     border-radius: 3px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 10px;
     background-color: #FFAA8F;
   }
 }

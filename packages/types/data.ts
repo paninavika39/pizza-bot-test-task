@@ -10,6 +10,7 @@ export type Order = {
   adress: string;
   comment: string | null;
   date: string;
+  status?: string;
 };
 
 export type SavedOrder = Entry<Order>;
