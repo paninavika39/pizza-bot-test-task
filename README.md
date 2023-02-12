@@ -1,73 +1,34 @@
-# Turborepo starter
+### Микросервис Бот
 
-This is an official npm starter turborepo.
+Этот микросервис отвечает за взаимодействие со слэком - установка бота в слэк команду, хранение слэк токенов, общение с заказчиком, отправка уведомлений.
 
-## What's inside?
+1. В процессе взаимодействия с ботом, пользователь должен указать:
+    1. Название пиццы
+    2. Размер
+    3. Тесто (обычное, тонкое)
+    4. Бортик (обычный, сырный, колбасный и тд)
+    5. Добавки (больше сыра, мяса и тд)
+    6. Адрес доставки
+    7. Комментарий к заказу
+2. После получения всех данных, бот должен отправить информацию о заказе в микросервис **Кабинет менеджера.** Можно сделать через HTTP, но (опционально) можно использовать RabbitMQ.
+3. (Опционально) Микросервис должен быть устойчив к перезапускам (если перезапустится процесс микросервиса на бэкенде, то пользователь сможет продолжить вводить данные дальше и даже не заметит никаких проблем)
+4. Бот можно добавлять в любую слэк команду
+5. Реализовать на nodejs + typescript, данные хранить в MongoDB
 
-This turborepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following packages/apps:
+ДЛЯ НАСТРОЙКИ ОТПРАВЛЕНИЯ ИНТЕРАКТИВНЫХ СООБЩЕНИЙ я настраивала URL в настройках приложения Interactivity & Shortcuts с помощью ngrok, чтобы сделать локальный порт общедоступным: 
 
-### Apps and Packages
+await slackInteractions.start(port); //apps/slack-bot/src/bot.ts :163 - здесь я использовала локальный порт (от локалхоста), адрес с https вписывала в настройки приложения
+![image](https://user-images.githubusercontent.com/67381993/218274819-9652ec95-27fc-4aa0-803f-26ca56653399.png)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+### Микросервис Кабинет Менеджера
 
-This turborepo has some additional tools already setup for you:
+Этот микросервис отвечает за работу с заказами.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-npm run build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-npm run dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+1. Реализовать SPA приложение на [Angular](https://angular.io/) + Typescript. Которое взаимодействует со своим отдельным бэкендом посредствам HTTP запросов.
+2. Данные хранятся в MongoDB
+3. Есть простая авторизация для менеджера (чтобы получить доступ к веб кабинету)
+4. В веб кабинете можно увидеть список заказов с информацией о заказчике (имя, аватар). Можно менять статусы заказов (принято, готовится, в доставке, доставлено, отменено)
+5. Уведомлять пользователя об изменении статуса заказа при помощи **Микросервис Бот**. Можно сделать через HTTP, но (опционально) можно использовать RabbitMQ.
+6. (Опционально) Возможность для менеджера написать сообщение через веб форму, которое отправится заказчику в слэк; заказчик сможет на него ответить в слэк треде;  менеджер получит этот ответ в своем веб кабинете. Таким образом реализуется простой чат.
